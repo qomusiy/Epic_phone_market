@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ phone.model }} - O'chirish</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #222, #444);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-danger {
+            background: red;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: darkred;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-cancel {
+            background: #ffcc00;
+            color: #222;
+            text-decoration: none;
+            padding: 12px 25px;
+            display: inline-block;
+        }
+
+        .btn-cancel:hover {
+            background: gold;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>"{{ phone.model }}" o'chib ketyabdi, ishonchingiz komilmi?</h1>
+        
+        <form action="{% url 'phone_delete' phone.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Haqiqatdan ham o‘chirmoqchimisiz?')">HA, O'chir</button>
+        </form>
+
+        <a href="{% url 'phone_detail' phone.id %}" class="btn-cancel">Yo'q, Qaytish</a>
+    </div>
+
+</body>
+</html>

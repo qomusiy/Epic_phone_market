@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ phonen2.maker }} {{ phonen2.model }} - Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #222, #444);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            animation: fadeInDown 1s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container img {
+            width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .container img:hover {
+            transform: scale(1.05);
+        }
+        .info {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .info p {
+            margin: 10px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #ffcc00;
+            color: #222;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            margin-top: 15px;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            background: #222;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .back-button:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Phone Market</h1>
+    </header>
+    
+    <div class="container">
+        {% if phonen2.image %}
+        <img src="{{ phonen2.image.url }}" alt="{{ phonen2.maker }} {{ phonen2.model }}">
+        {% else %}
+        <img src="https://cdn-icons-png.flaticon.com/512/545/545194.png" alt="No Image Available">
+        {% endif %}
+
+        <h2>{{ phonen2.maker }} {{ phonen2.model }} ({{ phonen2.year }})</h2>
+        <div class="info">
+            <p><strong>Color:</strong> {{ phonen2.color }}</p>
+            <p><strong>Price:</strong> ${{ phonen2.price }}</p>
+            <p><strong>Description:</strong> {{ phonen2.description }}</p>
+            <p><strong>Added on:</strong> {{ phonen2.created_at }}</p>
+        </div>
+        <a href="#" class="cta-button">Buy Now</a>
+    </div>
+    <div class="container">
+        <a href="{% url 'phone_list' %}" class="back-button">Go Back</a>
+        <a href="{% url 'phone_edit' phonen2.id %}" class="back-button">Edit the Phone</a>
+        <a href="{% url 'phone_delete' phonen2.id %}" class="back-button">Delete the Phone</a>
+    </div>
+    <footer>
+        <p>&copy; 2025 Phone Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>
